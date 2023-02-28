@@ -1,7 +1,7 @@
 module.exports = {
     target: "serverless",
     functions: {
-      hello: {
+        getServerSideProps: {
         handler: "index.js",
         timeout: 30,
       },
