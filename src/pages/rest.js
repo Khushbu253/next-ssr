@@ -16,7 +16,7 @@ const Rest=({data})=>{
     return (
         <>
           <Head>
-            <title>Rest</title>
+            <title>{data.title}</title>
             <meta name="description" content="rest page create next app" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
