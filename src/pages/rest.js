@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 const inter = Inter({ subsets: ['latin'] })
 
 
-const About=({data})=>{
+const Rest=({data})=>{
     console.log(data,"test dynamic data")
     const router = useRouter()
 
@@ -16,25 +16,23 @@ const About=({data})=>{
     return (
         <>
           <Head>
-            <title>about</title>
-            <meta name="description" content=" about page create next app" />
+            <title>Rest</title>
+            <meta name="description" content="rest page create next app" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <main className={styles.main}>
             test about with getServerSideProps
-             {/* <p>{data.addressLine1}</p>
-            <p>{data.addressLine2}</p>  */}
-          <p>{data.footerText}</p>
-    
+           <p>{data.description}</p>
+           <img src={data.images[0]} alt="demo image"/>
           </main>
         </>
       )
   }
 
-export default About;
+export default Rest;
 export async function getServerSideProps() { 
-  const res = await fetch(`https://api.cybercomcreation.com/address`)
+  const res = await fetch(`https://dummyjson.com/products/1`)
      const data = await res.json()
   
     // Pass data to the page via props
