@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-
+import axios from 'axios'
 const inter = Inter({ subsets: ['latin'] })
 
 
@@ -28,13 +28,15 @@ function Home(props) {
   )
 }
 export default Home;
-export async function getServerSideProps() { 
+export async function getServerSideProps() {
   // const res = await fetch(`https://api.cybercomcreation.com/address`)
-  const seo =await fetch(`http://192.168.0.204:1330/seo-rest`)
+  // const seo =await fetch(`http://192.168.0.204:1330/seo-rest`)
+  const response = await axios.get('http://192.168.0.204:1330/seo-rest');
+  const seo = response.data;
     // Pass data to the page via props
    return { props: {
                       // data :await res.json(),
-                      seo: await seo.json()
+                      seo
                     } 
           }
 }
