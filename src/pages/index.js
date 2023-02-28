@@ -8,15 +8,15 @@ const inter = Inter({ subsets: ['latin'] })
 
 function Home(props) {
   console.log(props.data,props.seo,"dataaaa")
-  const metaDetails=props.seo
-  // const metaDetails=props.seo.seoDetails.find((detail)=>detail.pageName==='home')
+  // const metaDetails=props.seo
+   const metaDetails=props.seo.seoDetails.find((detail)=>detail.pageName==='home')
   // console.log(metaDetails,"meta")
   return (
     <>
       <Head>
-        <title>{metaDetails.title}</title>
-        <meta name="description" content={metaDetails.meta_description}/>
-        <meta name="keywords" content={metaDetails.meta_keyword}/>
+        <title>{metaDetails.metaTitle}</title>
+        <meta name="description" content={metaDetails.metaDescription}/>
+        <meta name="keywords" content={metaDetails.metaKeyword}/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -31,7 +31,7 @@ export default Home;
 export async function getServerSideProps() {
   // const res = await fetch(`https://api.cybercomcreation.com/address`)
   // const seo =await fetch(`http://192.168.0.204:1330/seo-rest`)
-  const response = await axios.get('http://192.168.0.204:1330/seo-rest');
+  const response = await axios.get('http://192.168.0.204:1330/seo');
   const seo = response.data;
     // Pass data to the page via props
    return { props: {
