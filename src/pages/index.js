@@ -22,18 +22,18 @@ function Home(props) {
       </Head>
       <main className={styles.main}>
         welcome
-        <h2>{props.data.email}</h2>
+        {/* <h2>{props.data.email}</h2> */}
       </main>
     </>
   )
 }
 export default Home;
 export async function getServerSideProps() { 
-  const res = await fetch(`https://api.cybercomcreation.com/address`)
+  // const res = await fetch(`https://api.cybercomcreation.com/address`)
   const seo =await fetch(`http://192.168.0.204:1330/seo-rest`)
     // Pass data to the page via props
    return { props: {
-                      data :await res.json(),
+                      // data :await res.json(),
                       seo: await seo.json()
                     } 
           }
