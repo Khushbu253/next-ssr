@@ -3,7 +3,7 @@ module.exports = {
     functions: {
         getServerSideProps: {
         handler: "./index.js",
-        timeout: 30,
+        timeout: 50,
       },
     },
   };
