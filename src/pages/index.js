@@ -6,19 +6,22 @@ import styles from '@/styles/Home.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 
-function Home({data}) {
-  console.log(data,"dataaaa")
+function Home(props) {
+  console.log(props.data,props.seo,"dataaaa")
+  const metaDetails=props.seo.seoDetails.find((detail)=>detail.pageName==='home')
+  // console.log(metaDetails,"meta")
   return (
     <>
       <Head>
-        <title>Home</title>
-        <meta name="description" content="home page" />
+        <title>{metaDetails.metaTitle}</title>
+        <meta name="description" content={metaDetails.metaDescription}/>
+        <meta name="keywords" content={metaDetails.metaKeywords}/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
         welcome
-        <h2>{data.email}</h2>
+        <h2>{props.data.email}</h2>
       </main>
     </>
   )
@@ -26,9 +29,12 @@ function Home({data}) {
 export default Home;
 export async function getServerSideProps() { 
   const res = await fetch(`https://api.cybercomcreation.com/address`)
-     const data = await res.json()
-  
+  const seo =await fetch(`https://api.cybercomcreation.com/seo`)
     // Pass data to the page via props
-   return { props: {data} }
+   return { props: {
+                      data :await res.json(),
+                      seo: await seo.json()
+                    } 
+          }
 }
 
