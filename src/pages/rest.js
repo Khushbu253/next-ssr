@@ -22,7 +22,7 @@ const Rest=({data})=>{
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <main className={styles.main}>
-            test about with getServerSideProps
+           <h2> test about with getServerSideProps</h2>
            <p>{data.description}</p>
            <img src={data.images[0]} alt="demo image"/>
           </main>

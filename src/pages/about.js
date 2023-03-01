@@ -22,7 +22,7 @@ const About=({data})=>{
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <main className={styles.main}>
-            test about with getServerSideProps
+           <h2>test about with getServerSideProps</h2> 
              {/* <p>{data.addressLine1}</p>
             <p>{data.addressLine2}</p>  */}
           <p>{data.footerText}</p>

@@ -8,35 +8,33 @@ const inter = Inter({ subsets: ['latin'] })
 
 function Home(props) {
   console.log(props.data,props.seo,"dataaaa")
-  // const metaDetails=props.seo
-   const metaDetails=props.seo.seoDetails.find((detail)=>detail.pageName==='home')
-  // console.log(metaDetails,"meta")
+  const metaDetails=props.seo
   return (
     <>
       <Head>
-        <title>{metaDetails.metaTitle}</title>
-        <meta name="description" content={metaDetails.metaDescription}/>
-        <meta name="keywords" content={metaDetails.metaKeyword}/>
+        <title>{metaDetails.title}</title>
+        <meta name="description" content={metaDetails.meta_description}/>
+        <meta name="keywords" content={metaDetails.meta_keyword}/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        welcome
-        {/* <h2>{props.data.email}</h2> */}
+       <h1> welcome</h1>
+         <h2>{props.data.email}</h2> 
       </main>
     </>
   )
 }
 export default Home;
 export async function getServerSideProps() {
-  // const res = await fetch(`https://api.cybercomcreation.com/address`)
+  const res = await fetch(`https://api.cybercomcreation.com/address`)
   // const seo =await fetch(`http://192.168.0.204:1330/seo-rest`)
-  const response = await axios.get('http://192.168.0.204:1330/seo');
-  const seo = response.data;
+  const seoData = await fetch('http://192.168.0.204:1330/seo-rest');
+  
     // Pass data to the page via props
    return { props: {
-                      // data :await res.json(),
-                      seo
+                      data :await res.json(),
+                      seo :await seoData.json()
                     } 
           }
 }
