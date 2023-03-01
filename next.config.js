@@ -12,4 +12,5 @@ module.exports = nextConfig,{
     MY_VAR: process.env.MY_VAR,
     API_URL: 'https://api.cybercomcreation.com',
   },
+  FUNCTION_INVOCATION_TIMEOUT:false
 }
