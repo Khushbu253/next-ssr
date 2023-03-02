@@ -2,27 +2,34 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-import axios from 'axios'
 const inter = Inter({ subsets: ['latin'] })
-
+import { ApolloProvider } from "@apollo/react-hooks";
+import client from 'ApolloClient/client'
+import Layout from '@/components/App/Layout'
+import Navbar from '@/components/App/Navbar'
 
 function Home(props) {
   console.log(props.data,props.seo,"dataaaa")
   const metaDetails=props.seo
   return (
-    <>
-      <Head>
-        <title>{metaDetails.title}</title>
-        <meta name="description" content={metaDetails.meta_description}/>
-        <meta name="keywords" content={metaDetails.meta_keyword}/>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={styles.main}>
-       <h1> welcome</h1>
-         <h2>{props.data.email}</h2> 
-      </main>
-    </>
+    <ApolloProvider client={client}>
+    <Layout pageName="home">
+      <Navbar />
+    </Layout>
+  </ApolloProvider>
+    // <>
+    //   <Head>
+    //     <title>{metaDetails.title}</title>
+    //     <meta name="description" content={metaDetails.meta_description}/>
+    //     <meta name="keywords" content={metaDetails.meta_keyword}/>
+    //     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    //     <link rel="icon" href="/favicon.ico" />
+    //   </Head>
+     
+    //  <main className={styles.main}>
+    //    <h1> welcome</h1>
+    //      <h2>{props.data.email}</h2> 
+    //   </main> 
   )
 }
 export default Home;
