@@ -35,9 +35,10 @@ function Home(props) {
 }
 export default Home;
 export async function getServerSideProps() {
+  console.log(process.env.NEXT_PUBLIC_GRAPHQL_API_URL,"env variable")
   try{
-    const footer = await fetch(`${process.env.GRAPHQL_API_URL}address`);
-    const banner = await fetch(`${process.env.GRAPHQL_API_URL}default-banner`);
+    const footer = await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}address`);
+    const banner = await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}default-banner`);
 
     return{
       props:{
