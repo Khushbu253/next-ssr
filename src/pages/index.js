@@ -26,7 +26,7 @@ function Home(props) {
   return (
      <>
       <Head>
-        <title>Home</title>
+        <title>Cybercom Creation - Home</title>
         <meta name="title" content={metaDetails.metaTitle}/>
         <meta name="description" content={metaDetails.metaDescription}/>
         <meta name="keywords" content={metaDetails.metaKeywords}/>
