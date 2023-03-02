@@ -26,7 +26,8 @@ function Home(props) {
   return (
      <>
       <Head>
-        <title>{metaDetails.metaTitle}</title>
+        <title>Home</title>
+        <meta name="title" content={metaDetails.metaTitle}/>
         <meta name="description" content={metaDetails.metaDescription}/>
         <meta name="keywords" content={metaDetails.metaKeywords}/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
