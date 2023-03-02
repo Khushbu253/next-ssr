@@ -20,8 +20,20 @@ import ProjectStartArea from '@/components/index/ProjectStartArea'
 import OurBlog from '@/components/index/OurBlog'
 
 function Home(props) {
-  console.log(props.footer,"footer data")
+  console.log(props.seo,"footer data")
+  const metaDetails = props.seo.seoDetails.find((details)=>details.pageName==='home')
+  console.log(metaDetails,"current meta details")
   return (
+     <>
+      <Head>
+        <title>{metaDetails.metaTitle}</title>
+        <meta name="description" content={metaDetails.metaDescription}/>
+        <meta name="keywords" content={metaDetails.metaKeywords}/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+     
+    
     <ApolloProvider client={client}>
     <Layout pageName="home">
       <Navbar />
@@ -47,25 +59,14 @@ function Home(props) {
         <Footer footer={props.footer} />
     </Layout>
   </ApolloProvider>
-    // <>
-    //   <Head>
-    //     <title>{metaDetails.title}</title>
-    //     <meta name="description" content={metaDetails.meta_description}/>
-    //     <meta name="keywords" content={metaDetails.meta_keyword}/>
-    //     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    //     <link rel="icon" href="/favicon.ico" />
-    //   </Head>
-     
-    //  <main className={styles.main}>
-    //    <h1> welcome</h1>
-    //      <h2>{props.data.email}</h2> 
-    //   </main> 
+  </>
   )
 }
 export default Home;
 export async function getServerSideProps() {
   console.log(process.env.NEXT_PUBLIC_GRAPHQL_API_URL,"env variable")
   try{
+    const seo=  await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}seo`);
     const footer = await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}address`);
     const banner = await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}default-banner`);
     const solution = await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}solution`);
@@ -92,6 +93,7 @@ export async function getServerSideProps() {
     );
     return{
       props:{
+        seo: await seo.json(),
         footer: await footer.json(),
         banner: await banner.json(),
         solution: await solution.json(),
