@@ -7,14 +7,15 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import client from 'ApolloClient/client'
 import Layout from '@/components/App/Layout'
 import Navbar from '@/components/App/Navbar'
+import Banner from '@/components/index/Banner'
 
 function Home(props) {
-  console.log(props.data,"dataaaa")
-  const metaDetails=props.seo
+  console.log(props.footer,"footer data")
   return (
     <ApolloProvider client={client}>
     <Layout pageName="home">
       <Navbar />
+      <Banner data={props.banner}/>
     </Layout>
   </ApolloProvider>
     // <>
@@ -34,15 +35,22 @@ function Home(props) {
 }
 export default Home;
 export async function getServerSideProps() {
-  const res = await fetch(`https://api.cybercomcreation.com/address`)
-  // const seo =await fetch(`http://192.168.0.204:1330/seo-rest`)
-  // const seoData = await fetch('http://192.168.0.204:1330/seo-rest');
-  
-    // Pass data to the page via props
-   return { props: {
-                      data :await res.json(),
-                      // seo :await seoData.json()
-                    } 
-          }
+  try{
+    const footer = await fetch(`${process.env.GRAPHQL_API_URL}address`);
+    const banner = await fetch(`${process.env.GRAPHQL_API_URL}default-banner`);
+
+    return{
+      props:{
+        footer: await footer.json(),
+        banner: await banner.json(),
+      }
+    }
+  }catch (error) {
+    return {
+      status: 500,
+      headers: {},
+      props: {},
+    };
+  }
 }
 
