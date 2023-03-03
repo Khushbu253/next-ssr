@@ -2,7 +2,6 @@ import Link from 'next/link';
 import React from 'react';
 import { useRecoilState } from 'recoil'
 import { collapsedState, menuCollapsedState } from '../../utils/recoil-atoms'
-// import {Link} from 'gatsby'
 import logo from "../../assets/images/logo.png"
 import Image from 'next/image';
 

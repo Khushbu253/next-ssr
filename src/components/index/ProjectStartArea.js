@@ -1,6 +1,8 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import shape from '../../assets/images/shape/circle-shape1.png'
+// import shape from '../../assets/images/shape/circle-shape1.png'
 
 const ProjectStartArea = ({ProjectStartArea}) => {
    
@@ -33,7 +35,7 @@ const ProjectStartArea = ({ProjectStartArea}) => {
                 </div>
             </div>
             <div className="circle-shape1">
-                <img src={shape} alt="project" />
+                <Image src={shape} alt="project" />
             </div>
         </div>
     )
