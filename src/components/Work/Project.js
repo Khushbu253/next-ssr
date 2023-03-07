@@ -11,9 +11,9 @@ const Project = ({projects}) => {
                         <div className="col-lg-6 col-md-12">
                             <div className="our-mission-content">
                                 <div className="content custom-width">
-                                <span className="sub-title">
+                                {/* <span className="sub-title">
                                    {workSection1.title}
-                                </span>
+                                </span> */}
                                     <h1>{workSection1.heading}</h1>
                                     <p>{workSection1.description}</p>
 

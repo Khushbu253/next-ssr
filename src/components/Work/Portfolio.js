@@ -92,7 +92,7 @@ const Portfolio = ({portfolio,portfolioProjects}) => {
             <img src={starIcon} alt="project" /> {subTitle}
           </span>
           <h2>{title}</h2>
-          <p>{shortText}</p>
+          {/* <p>{shortText}</p> */}
         </div>
 
           <div className="filter-part portfolioPage-filter-part">
