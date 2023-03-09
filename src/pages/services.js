@@ -26,7 +26,6 @@ const services = (props) => {
         <meta name="description" content={metaDetails.metaDescription}/>
         <meta name="keywords" content={metaDetails.metaKeywords}/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
     </Head>
     <Layout pageName="services" seoData={props?.seoDetails}>
       <Navbar/>
