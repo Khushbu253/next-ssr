@@ -8,11 +8,22 @@ import OurIntro from "@/components/career/OurIntro";
 import OurServices from "@/components/career/OurServices";
 import PhotoGallery from "@/components/career/PhotoGallery";
 import PageBanner from "@/components/common/PageBanner";
+import Head from "next/head";
 import React from "react";
 
 
 const career = (props) => {
+  const metaDetails = props.seo.seoDetails.find((details)=>details.pageName==='career')
   return (
+    <>
+    <Head>
+        <title>Career - Cybercom Creation</title>
+        <meta name="title" content={metaDetails.metaTitle}/>
+        <meta name="description" content={metaDetails.metaDescription}/>
+        <meta name="keywords" content={metaDetails.metaKeywords}/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+    </Head>
     <Layout pageName="career">
       <Navbar/>
       <PageBanner />
@@ -24,12 +35,14 @@ const career = (props) => {
       <Feedback Feedback={props.Feedback}/>
       <Footer footer={props.footer} />
     </Layout >
+  </>
   );
 };
 export default career;
 
 export async function getServerSideProps() {
   try {
+    const seo=  await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}seo`);
     const footer = await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}address`);
     const OurServices = await fetch(
       `${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}career-section-1`
@@ -51,6 +64,7 @@ export async function getServerSideProps() {
     );
     return {
       props: {
+        seo: await seo.json(),
         footer: await footer.json(),
         OurServices: await OurServices.json(),
         OurIntro: await OurIntro.json(),

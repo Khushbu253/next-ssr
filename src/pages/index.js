@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-const inter = Inter({ subsets: ['latin'] })
 import { ApolloProvider } from "@apollo/react-hooks";
 import client from 'ApolloClient/client'
 import Layout from '@/components/App/Layout'
@@ -26,7 +24,7 @@ function Home(props) {
   return (
      <>
       <Head>
-        <title>Cybercom Creation - Home</title>
+        <title>Home - Cybercom Creation</title>
         <meta name="title" content={metaDetails.metaTitle}/>
         <meta name="description" content={metaDetails.metaDescription}/>
         <meta name="keywords" content={metaDetails.metaKeywords}/>

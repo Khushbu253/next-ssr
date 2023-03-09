@@ -4,11 +4,22 @@ import Navbar from '@/components/App/Navbar';
 import PageBanner from '@/components/common/PageBanner';
 import ContactForm from '@/components/Contact/ContactForm';
 import ContactInfo from '@/components/Contact/ContactInfo';
+import Head from 'next/head';
 import React from 'react'
 
 
 const contact = (props) => {
+  const metaDetails = props.seoDetails.seoDetails.find((details)=>details.pageName==='contact')
   return (
+    <>
+    <Head>
+        <title>Contact Us - Cybercom Creation</title>
+        <meta name="title" content={metaDetails.metaTitle}/>
+        <meta name="description" content={metaDetails.metaDescription}/>
+        <meta name="keywords" content={metaDetails.metaKeywords}/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+    </Head>
     <Layout pageName="contact" seoData={props?.seoDetails}>
       <Navbar/>
       <PageBanner pageTitle="Work" 
@@ -19,6 +30,7 @@ const contact = (props) => {
             <ContactForm />
                       <Footer footer={props.footer} />
     </Layout>
+    </>
   )
 }
 

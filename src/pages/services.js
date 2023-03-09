@@ -12,11 +12,22 @@ import Features from '@/components/Services/Features';
 import Management from '@/components/Services/Management';
 import OurFeatures from '@/components/Services/OurFeatures';
 import ServicesTab from '@/components/Services/ServicesTab';
+import Head from 'next/head';
 import React from 'react'
 
 
 const services = (props) => {
+  const metaDetails = props.seoDetails.seoDetails.find((details)=>details.pageName==='services')
   return (
+    <>
+    <Head>
+        <title>Services - Cybercom Creation</title>
+        <meta name="title" content={metaDetails.metaTitle}/>
+        <meta name="description" content={metaDetails.metaDescription}/>
+        <meta name="keywords" content={metaDetails.metaKeywords}/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+    </Head>
     <Layout pageName="services" seoData={props?.seoDetails}>
       <Navbar/>
       <PageBanner />
@@ -33,6 +44,7 @@ const services = (props) => {
 
       <Footer footer={props.footer} />
     </Layout>
+    </>
   )
 }
 export async function getServerSideProps() {
