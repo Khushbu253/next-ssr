@@ -12,18 +12,19 @@ import Image from "next/image"
 
 
 const Portfolio = ({portfolio,portfolioProjects}) => {
-
   const [projectData, setProjectData] = useState([])
-  
+  // const [offset, setOffset] = useState(0)
+  // const [hasMore, setHasMore] = useState(true)
+  // const data = useStaticQuery(query)
   const [showCarousel, setShowCarousel] = useState(false)
   const [activeGallary, setActiveGallary] = useState([])
+  const [selectedTechnology,setSelectedTechnology] = useState("All Technology")
+  const [filteredProjects, setFilteredProjects] = useState([])
+  const [eCommerceProjects, setECommerceProjects] = useState([])
+  const [mobileProjects, setMobileProjects] = useState([])
+  // const [currentImage, setCurrentImage] = useState(0);
   const [viewerImages, setViewerImages] = useState([])
-   
-  const [selectedTechnology,setSelectedTechnology]=useState('All Technology')
-  const [filteredProjects,setFilteredProjects]=useState([])
-  const[eCommerceProjects,setECommerceProjects]=useState([]);
-  const[mobileProjects,setMobileProjects]=useState([]);
-  
+
   useEffect( () => {
    
     if (portfolioProjects) {
@@ -36,53 +37,56 @@ const Portfolio = ({portfolio,portfolioProjects}) => {
       // setHasMore(false)
       }
   }, [portfolioProjects])
+  
 
+  const sortProjects = projects => {
+    const data = [...projectData, ...projects]
+    const sortedData = data.sort((a, b) => a.displayOrder - b.displayOrder)
 
-
-  const sortProjects =(projects)=>{
-   const data=[...projectData, ...projects]
-    const sortedData=data.sort((a,b)=>a.displayOrder-b.displayOrder)
-    
-    const eCommerce=sortedData.filter((project)=>project.technology==='E-commerce')
-      setECommerceProjects(eCommerce)
-    const mobileApp=sortedData.filter((project)=>project.technology==='Mobile-Applications')
-      setMobileProjects(mobileApp)
-      setProjectData(sortedData)
-      setFilteredProjects(sortedData)
-    
+    const eCommerce = sortedData.filter(
+      project => project.technology === "E-commerce"
+    )
+    setECommerceProjects(eCommerce)
+    const mobileApp = sortedData.filter(
+      project => project.technology === "Mobile-Applications"
+    )
+    setMobileProjects(mobileApp)
+    setProjectData(sortedData)
+    setFilteredProjects(sortedData)
   }
 
   const  { subTitle, title, shortText }= portfolio
-  
-  const addGallary = images => {
+
+  const addGallary = (index, images) => {
     let srcs = []
     images.map(img => srcs.push(img.url))
+    // setActiveGallary(images)
+
     setViewerImages(srcs)
+    // setCurrentImage(index)
     setShowCarousel(true)
   }
 
-  const technologies=projectData.map((project)=>project.technology)
+  const technologies = projectData.map(project => project.technology)
   // const fetchMoreProjects=()=>{
   //   setOffset(projectData.length)
   // }
 
-  const handleTechnology=(e)=>{
+  const handleTechnology = e => {
     setSelectedTechnology(e)
   }
   const handleProjectFilter = () => {
-    
-    if (selectedTechnology === 'All Technology') {
-     setFilteredProjects(projectData)
+    if (selectedTechnology === "All Technology") {
+      setFilteredProjects(projectData)
     } else {
       const list = projectData.filter(
-        project =>
-         project.technology === selectedTechnology
+        project => project.technology === selectedTechnology
       )
       setFilteredProjects(list)
     }
   }
 
-  // const displayProjects = (selectedTechnology === 'E-commerce') ? eCommerceProjects 
+  // const displayProjects = (selectedTechnology === 'E-commerce') ? eCommerceProjects
   // : (selectedTechnology === 'Mobile-Applications') ?  mobileProjects : filteredProjects
 
   return (
@@ -96,23 +100,25 @@ const Portfolio = ({portfolio,portfolioProjects}) => {
           {/* <p>{shortText}</p> */}
         </div>
 
-          <div className="filter-part portfolioPage-filter-part">
-            <DropdownButton
-              id="dropdown-basic-button"
-              title={selectedTechnology}
-              value={selectedTechnology}
-              onSelect={handleTechnology}
-            >
-              <Dropdown.Item eventKey='All Technology'>All Technology</Dropdown.Item> 
-              {[...new Set(technologies)].map(tech => (
-                <Dropdown.Item eventKey={tech}>{tech}</Dropdown.Item>
-              ))}
-            </DropdownButton>
-          
-            <button className="cc-button-part" onClick={handleProjectFilter}>
-              Find
-            </button>
-          </div>
+        <div className="filter-part portfolioPage-filter-part">
+          <DropdownButton
+            id="dropdown-basic-button"
+            title={selectedTechnology}
+            value={selectedTechnology}
+            onSelect={handleTechnology}
+          >
+            <Dropdown.Item eventKey="All Technology">
+              All Technology
+            </Dropdown.Item>
+            {[...new Set(technologies)].map(tech => (
+              <Dropdown.Item eventKey={tech}>{tech}</Dropdown.Item>
+            ))}
+          </DropdownButton>
+
+          <button className="cc-button-part" onClick={handleProjectFilter}>
+            Find
+          </button>
+        </div>
 
         {/* <InfiniteScroll
           dataLength={projectData.length}
@@ -121,50 +127,55 @@ const Portfolio = ({portfolio,portfolioProjects}) => {
           loader={<h4>loading....</h4>}
           scrollThreshold={0.5}
         > */}
-          <div className="row justify-content-center pt-100">
-            {filteredProjects.map((project, index) => {
-              return (
-                <div className="col-lg-4 col-md-6 d-flex" key={index}>
-                  <div className="single-projects-box">
-                    <div>
-                      <img
-                        src={
-                          project.image?.formats?.small?.url ||
-                          project.image?.url
-                        }
-                        onClick={() => addGallary(project.lightBox)}
-                        alt="Project Image"
-                      />
-                      {/* <Link className="link-btn" to={`/projects/${project.slug}`}>
-                      <i className="bx bx-plus"></i>
-                    </Link> */}
-                    </div>
-                    <div className="content mt-auto">
-                      <h3>
-                        <a onClick={()=>setShowCarousel(true)}>
-                          {project.title}
-                        </a>
-                      </h3>
-                      <span onClick={()=>setShowCarousel(true)}>{project.subTitle}</span>
-                    </div>
+        <div className="row justify-content-center pt-100">
+          {filteredProjects.map((project, index) => {
+            return (
+              <div className="col-lg-4 col-md-6 d-flex" key={index}>
+                <div className="single-projects-box">
+                  {/* <div> */}
+                  <img
+                    src={
+                      project.image?.formats?.small?.url || project.image?.url
+                    }
+                    onClick={() => addGallary(index, project.lightBox)}
+                    alt="Project Image"
+                    // width="300"
+                    key={index}
+                    style={{ margin: "2px" }}                                                                                                                                                                                                                                 
+                  />
+                  {/* </div> */}
+                  <div className="content mt-auto">
+                    <h3>
+                      <a onClick={() => setShowCarousel(true)}>
+                        {project.title}
+                      </a>
+                    </h3>
+                    <span onClick={() => setShowCarousel(true)}>
+                      {project.subTitle}
+                    </span>
                   </div>
                 </div>
-              )
-            })}
-          </div>
+              </div>
+            )
+          })}
+        </div>
         {/* </InfiniteScroll> */}
       </div>
 
-      <Modal className="work-model fusi-modal"
-        size="lg"
+      <Modal
+        // className="work-model"
+        size="sm"
         aria-labelledby="contained-modal-title-vcenter "
         centered
         show={showCarousel}
         onHide={() => setShowCarousel(false)}
-        // className=""
+        // className="fusi-modal"
       >
+        {/* <Modal.Body> */}
         <ImageViewer
+        // className='hover-zoom'
           src={viewerImages}
+          //  currentIndex={0}
           disableScroll={false}
           backgroundStyle={{
             backgroundColor: "rgba(0,0,0,0.5)",
@@ -173,11 +184,10 @@ const Portfolio = ({portfolio,portfolioProjects}) => {
           onClose={() => {
             setShowCarousel(false)
           }}
-          leftArrowComponent={<Image src={leftArrow} />}
-          rightArrowComponent={<Image src={rightArrow} />}
+          leftArrowComponent={<img src={leftArrow} />}
+          rightArrowComponent={<img src={rightArrow} />}
         />
-        {/* <Modal.Body>
-          <Carousel>
+        {/* <Carousel>
             {activeGallary.map(image => (
               <Carousel.Item>
                 <img
@@ -187,10 +197,10 @@ const Portfolio = ({portfolio,portfolioProjects}) => {
                 />
               </Carousel.Item>
             ))}
-          </Carousel>
-        </Modal.Body> */}
+          </Carousel> */}
+        {/* </Modal.Body> */}
       </Modal>
- </section>
+    </section>
   )
 }
 
