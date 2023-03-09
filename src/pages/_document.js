@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-      <link rel="preconnect" href="http://www.cybercom.co.in"/>
+      <link rel="preconnect" href="https://www.cybercom.co.in"/>
       <link rel="icon" href="http://www.cybercom.co.in/wp-content/uploads/2013/04/favicon.ico" type="image/x-icon" as="fetch" crossorigin="anonymous"/>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
