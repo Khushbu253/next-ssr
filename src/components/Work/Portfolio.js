@@ -6,6 +6,7 @@ import { Dropdown, DropdownButton } from "react-bootstrap"
 import ImageViewer from "react-simple-image-viewer"
 import leftArrow from "../../assets/images/left-arrow.svg"
 import rightArrow from "../../assets/images/right-arrow.svg"
+import Image from "next/image"
 
 
 
@@ -172,8 +173,8 @@ const Portfolio = ({portfolio,portfolioProjects}) => {
           onClose={() => {
             setShowCarousel(false)
           }}
-          leftArrowComponent={<img src={leftArrow} />}
-          rightArrowComponent={<img src={rightArrow} />}
+          leftArrowComponent={<Image src={leftArrow} />}
+          rightArrowComponent={<Image src={rightArrow} />}
         />
         {/* <Modal.Body>
           <Carousel>
