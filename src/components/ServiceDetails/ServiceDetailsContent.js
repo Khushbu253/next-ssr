@@ -114,7 +114,7 @@ const ServiceDetailsContent = () => {
                                 <li><span>SQL</span></li>
                             </ul>
                             <div className="charts-image">
-                                <img src={charts} alt="about" />
+                                <Image src={charts} alt="about" />
                             </div>
                         </div>
                     </div>
