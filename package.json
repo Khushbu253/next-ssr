@@ -26,6 +26,7 @@
     "react-ga": "^3.3.1",
     "react-google-invisible-recaptcha": "^0.2.12",
     "react-image-lightbox": "^5.1.4",
+    "react-markdown": "^8.0.5",
     "react-modal-video": "^2.0.0",
     "react-owl-carousel3": "^2.2.5",
     "react-simple-image-viewer": "^1.2.2",

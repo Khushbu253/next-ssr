@@ -48,7 +48,7 @@ const OurSolutions = ({data,serviceSolutions}) => {
                                 </i>
                             </div>
                             <h3>
-                                <Link href={`/solution/${solution.slug}`}>
+                                <Link href={`/solution/${solution.id}`}>
                                     {solution.title}
                                 </Link>
                             </h3>
