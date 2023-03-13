@@ -4,10 +4,12 @@ import { useRecoilState } from 'recoil'
 import { collapsedState, menuCollapsedState } from '../../utils/recoil-atoms'
 import logo from "../../assets/images/logo.png"
 import Image from 'next/image';
+import { useRouter } from "next/router"
 
 const Navbar = () => {
     const [collapsed, setCollapsed] = useRecoilState(collapsedState);
     const [menuCollapsed, setmenuCollapsed] = useRecoilState(menuCollapsedState);
+    const router = useRouter()
 
     const toggleMenu = () => {
         setmenuCollapsed(!menuCollapsed);
@@ -67,9 +69,9 @@ const Navbar = () => {
                                     <li className="nav-item">
                                         <Link 
                                             href="/" 
-                                            activeClassName="active"
+                                            // activeClassName="active"
                                             // onClick={e => e.preventDefault()} 
-                                            className="nav-link"
+                                            className={router.pathname ==='/' ? "nav-link active" : "nav-link"}
                                         >
                                             Home 
                                             {/* <i className='bx bx-chevron-down'></i> */}
@@ -79,9 +81,9 @@ const Navbar = () => {
                                     <li className={companyClass}>
                                         <Link 
                                             href="/about-us"
-                                            activeClassName="active"
+                                            // activeClassName="active"
                                             onClick={toggleMenu}
-                                            className="nav-link"
+                                            className={router.pathname ==='/about-us' ? "nav-link active" : "nav-link"}
                                         >
                                             Company <i className='bx bx-chevron-down'></i>
                                         </Link>
@@ -90,9 +92,9 @@ const Navbar = () => {
                                             <li className="nav-item">
                                                 <Link 
                                                     href="/about-us" 
-                                                    activeClassName="active"
+                                                    // activeClassName="active"
                                                     onClick={() => setCollapsed(true)}
-                                                    className="nav-link"
+                                                    className={router.pathname ==='/about-us' ? "nav-link active" : "nav-link"}
                                                 >
                                                   Overview
                                                 </Link>
@@ -100,9 +102,9 @@ const Navbar = () => {
                                             <li className="nav-item">
                                                 <Link 
                                                      href="/career" 
-                                                     activeClassName="active"
+                                                    //  activeClassName="active"
                                                      onClick={() => setCollapsed(true)}
-                                                     className="nav-link"
+                                                     className={router.pathname ==='/career' ? "nav-link active" : "nav-link"}
                                                 >
                                                     Career  
                                                 </Link>
@@ -115,9 +117,9 @@ const Navbar = () => {
                                     <li className="nav-item">
                                         <Link 
                                             href="/partnership" 
-                                            activeClassName="active"
+                                            // activeClassName="active"
                                             onClick={() => setCollapsed(true)}
-                                            className="nav-link"
+                                            className={router.pathname ==='/partnership' ? "nav-link active" : "nav-link"}
                                         >
                                            Partnership 
                                         </Link>
@@ -125,9 +127,9 @@ const Navbar = () => {
                                     <li className="nav-item">
                                         <Link 
                                             href="/technology" 
-                                            activeClassName="active"
+                                            // activeClassName="active"
                                             onClick={() => setCollapsed(true)}
-                                            className="nav-link"
+                                            className={router.pathname ==='/technology' ? "nav-link active" : "nav-link"}
                                         >
                                             Technology
                                         </Link>
@@ -135,9 +137,9 @@ const Navbar = () => {
                                     <li className="nav-item">
                                         <Link 
                                             href="/services" 
-                                            activeClassName="active"
+                                            // activeClassName="active"
                                             onClick={() => setCollapsed(true)}
-                                            className="nav-link"
+                                            className={router.pathname ==='/services' ? "nav-link active" : "nav-link"}
                                         >
                                            Services 
                                         </Link>
@@ -145,9 +147,9 @@ const Navbar = () => {
                                     <li className="nav-item">
                                         <Link 
                                             href="/work" 
-                                            activeClassName="active"
+                                            // activeClassName="active"
                                             onClick={() => setCollapsed(true)}
-                                            className="nav-link"
+                                            className={router.pathname ==='/work' ? "nav-link active" : "nav-link"}
                                         >
                                            Work 
                                            {/* <i className='bx bx-chevron-down'></i> */}
@@ -179,8 +181,8 @@ const Navbar = () => {
                                     <li className="nav-item">
                                         <Link 
                                             href="/contact" 
-                                            activeClassName="active" 
-                                            className="nav-link"
+                                            // activeClassName="active" 
+                                            className={router.pathname ==='/contact' ? "nav-link active" : "nav-link"}
                                         >
                                             Contact Us
                                             {/* <i className='bx bx-chevron-down'></i> */}
