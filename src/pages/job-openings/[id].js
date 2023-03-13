@@ -17,7 +17,7 @@ var _jobObject;
 var _jobFile;
 var jobtital="";
 function ProductCatchAll(props) {
-  console.log(props.jobdata,"check job data")
+  // console.log(props.jobdata,"check job data")
   const job = props?.jobdata;
   var jobtital=props?.jobdata?.heading;
   const [clickedJob, setClickedJob] = useState("")
