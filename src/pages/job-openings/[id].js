@@ -13,9 +13,12 @@ import Layout from "@/components/App/Layout";
 import PageBanner from "@/components/common/PageBanner";
 import Footer from "@/components/App/Footer";
 import Navbar from "@/components/App/Navbar";
+import Head from "next/head";
+
 var _jobObject;
 var _jobFile;
 var jobtital="";
+
 function ProductCatchAll(props) {
   // console.log(props.jobdata,"check job data")
   const job = props?.jobdata;
