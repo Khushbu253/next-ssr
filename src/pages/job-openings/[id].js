@@ -213,7 +213,7 @@ function ProductCatchAll(props) {
         "logo" : "http://www.example.com/images/logo.png"
       },
       "jobLocation": {
-      "@type":`${job?.location}`,
+      "@type":"Place",
         "address": {
         "@type": "PostalAddress",
         "streetAddress": "B-303-06, The First",
@@ -228,8 +228,12 @@ function ProductCatchAll(props) {
     useEffect(()=>setJobSnippet(jobSnippetData),[])
   return (
     <>
-     <script type="application/ld+json"  dangerouslySetInnerHTML={{ __html: JSON.stringify(jobSnippet) }}>
-            </script>
+    <Head>
+    <script type="application/ld+json">
+   { JSON.stringify(jobSnippet)}
+    </script>
+    </Head>
+    
     <Layout pageName="services">
       <Navbar/>
       <PageBanner />
